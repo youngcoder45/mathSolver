@@ -1,12 +1,10 @@
-# Math Solver
+## Gesture-Based Math Solver (OpenCV + MediaPipe)
 
-# ✋🧠 Gesture-Based Math Solver using OpenCV and MediaPipe
-
-This project is a **real-time hand gesture-based calculator** that lets users input and evaluate mathematical expressions using only hand gestures. Designed for accessibility, and computer vision practice, it translates hand signs into digits, operators, and commands.
+This project is a **real-time hand gesture-based calculator** that lets you build and evaluate basic math expressions using only hand gestures in front of a webcam.
 
 ---
 
-## 🚀 Features
+## Features
 
 - Real-time gesture detection using webcam
 - Supports multi-digit input (e.g., showing 2 → 4 → 7 becomes "247")
@@ -17,7 +15,37 @@ This project is a **real-time hand gesture-based calculator** that lets users in
 
 ---
 
-## 🧠 Tech Stack
+## Requirements
+
+- Python 3
+- A working webcam
+
+---
+
+## Install
+
+```bash
+pip install opencv-python mediapipe numpy
+```
+
+---
+
+## Run
+
+```bash
+python mathSolver.py
+```
+
+Keyboard shortcuts while running:
+
+- `q` or `Esc`: quit
+- `c`: clear
+
+---
+
+---
+
+## Tech Stack
 
 | Tool        | Purpose                             |
 |-------------|-------------------------------------|
@@ -28,20 +56,41 @@ This project is a **real-time hand gesture-based calculator** that lets users in
 
 ---
 
-## ✋ Supported Gestures
+## Supported Gestures
 
-| Gesture                             | Function        |
-|-------------------------------------|-----------------|
-| 1–5 fingers (one hand)              | Digits 1–5      |
-| 5 + 1-4 fingers(both hands)         | Digits 6-9      |
-| Only one hand with 0 fingers        | Digit 0         |
-| 1 finger on both hands              | `+` (add)       |
-| 1 + 2 fingers                       | `-` (subtract)  |
-| 1 + 3 fingers                       | `*` (multiply)  |
-| 1 + 4 fingers                       | `/` (divide)    |
-| Both hands with 0 fingers           | `=` (evaluate)  |
-| Both hands with 5 fingers           | `Clear` input   |
-| Both hands 2 fingers                | `Delete` input  |
-| Right index < left index (spatial)  | Exit program    |
+| Gesture | Function |
+|---|---|
+| One hand showing 0–5 fingers | Append digit `0`–`5` |
+| Two hands: one hand `5` + other hand `1`–`4` | Append digit `6`–`9` |
+| Two hands: `1` + `1` | Append `+` |
+| Two hands: `1` + `2` (either order) | Append `-` |
+| Two hands: `1` + `3` (either order) | Append `*` |
+| Two hands: `1` + `4` (either order) | Append `/` |
+| Two hands: `0` + `0` | Evaluate (`=`) |
+| Two hands: `5` + `5` | Clear |
+| Two hands: `2` + `2` | Delete last char |
+| Two hands: `1` + `1` with index fingertips very close | Exit |
 
-> Gestures are detected based on hand landmark positions and finger states.
+Notes:
+
+- Gestures are based on MediaPipe hand landmarks and finger state detection.
+- The app uses a debounce delay (currently ~1.25s) to avoid repeated inputs; adjust `delay` in `mathSolver.py` if needed.
+
+---
+
+## Troubleshooting
+
+- **Webcam not opening**: close other apps using the camera, or try changing the camera index in `cv.VideoCapture(0)`.
+- **Laggy / missed gestures**: improve lighting, keep hands fully in frame, or reduce `delay`.
+
+---
+
+## Contributing
+
+See `CONTRIBUTING.md` for setup and guidelines.
+
+---
+
+## Credits
+
+- Original author: @youngcoder45
